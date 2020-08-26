@@ -1,23 +1,35 @@
-// aggiungi elementi
-function addItems() {
+// listener aggiunta items
+function addItemsListener() {
+  $('#itemAdd').keydown(function () {
+
+    if (event.which == 13){
+      addItems();
+    }
+
+  });
+
   $('#add').click(function () {
-    var item = $('#itemAdd').val();
-    $('#itemAdd').val('');
+    addItems();
+  });
+}
 
-    $.ajax({
-      url:'http://157.230.17.132:3021/todos',
-      method:'POST',
-      data:{
-        text:item
-      },
-      success:function (data) {
-        getList();
-      },
-      error:function (error) {
-        console.log(error);
-      }
-    })
+// aggiunta elementi
+function addItems() {
+  var item = $('#itemAdd').val();
+  $('#itemAdd').val('');
 
+  $.ajax({
+    url:'http://157.230.17.132:3021/todos',
+    method:'POST',
+    data:{
+      text:item
+    },
+    success:function (data) {
+      getList();
+    },
+    error:function (error) {
+      console.log(error);
+    }
   });
 }
 
@@ -62,7 +74,7 @@ function getList() {
 
 function init() {
   getList();
-  addItems();
+  addItemsListener();
   deleteItems();
 }
 
