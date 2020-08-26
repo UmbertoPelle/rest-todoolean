@@ -6,16 +6,32 @@
 
 body{
   position: relative;
+  background: cornflowerblue;
 }
 
 #container{
   display: flex;
   justify-content: center;
   align-items: baseline;
+  color: #fff;
+  text-shadow: 1px 1px #000;
 }
 
 #itemAdd{
   border: solid 1px #000;
+}
+
+#list > li{
+  font-size: 23px;
+  margin-top: 7px;
+}
+
+#list > li:hover{
+  text-decoration: underline;
+}
+
+#list li:hover .fa-trash-alt{
+  display: inline-block;
 }
 
 #add{
@@ -24,9 +40,11 @@ body{
   cursor: pointer;
 }
 
-.fa-trash-alt{
+#list li .fa-trash-alt{
   margin-left: 10px;
   cursor: pointer;
+  color: #c60b0b;
+  display: none;
 }
 
 #popUp{
