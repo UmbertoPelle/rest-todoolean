@@ -19,3 +19,8 @@
   color: white;
   cursor: pointer;
 }
+
+.fa-trash-alt{
+  margin-left: 10px;
+  cursor: pointer;
+}

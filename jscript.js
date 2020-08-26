@@ -1,5 +1,5 @@
 // aggiungi elementi
-function addItemsListner() {
+function addItems() {
   $('#add').click(function () {
     var item = $('#itemAdd').val();
     $('#itemAdd').val('');
@@ -21,6 +21,25 @@ function addItemsListner() {
   });
 }
 
+// elimina elementi
+function deleteItems() {
+  $(document).on('click','.fa-trash-alt',function () {
+    var clicked = $(this);
+    var id = clicked.data('id');
+
+    $.ajax({
+      url:'http://157.230.17.132:3021/todos/'+id,
+      method:'DELETE',
+      success:function (data) {
+        getList();
+      },
+      error:function (err) {
+        console.log(err);
+      }
+    });
+
+  });
+}
 
 // legge e stampa la lista di elementi
 function getList() {
@@ -32,7 +51,7 @@ function getList() {
       target.text('')
       for (var i = 0; i < data.length; i++) {
         var item = data[i].text;
-        target.append('<li data-id='+data[i].id+' class="item">'+item+'</li>');
+        target.append('<li class="item">'+item+'<i data-id='+ data[i].id + ' class="fas fa-trash-alt"></i>'+'</li>');
       }
     },
     error:function (err) {
@@ -43,7 +62,8 @@ function getList() {
 
 function init() {
   getList();
-  addItemsListner();
+  addItems();
+  deleteItems();
 }
 
 $(document).ready(init);
