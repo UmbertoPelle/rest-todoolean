@@ -34,22 +34,31 @@ function addItems() {
 }
 
 // elimina elementi
-function deleteItems() {
+function popUp() {
   $(document).on('click','.fa-trash-alt',function () {
     var clicked = $(this);
     var id = clicked.data('id');
+    $('#popUp').show();
 
-    $.ajax({
-      url:'http://157.230.17.132:3021/todos/'+id,
-      method:'DELETE',
-      success:function (data) {
-        getList();
-      },
-      error:function (err) {
-        console.log(err);
-      }
+    $('#delete').click(function () {
+      $.ajax({
+        url:'http://157.230.17.132:3021/todos/'+id,
+        method:'DELETE',
+        success:function (data) {
+          getList();
+        },
+        error:function (err) {
+          console.log(err);
+        }
+      });
+      $('#popUp').hide();
+      id='';
     });
 
+    $('#close').click(function () {
+      $('#popUp').hide();
+      id='';
+    });
   });
 }
 
@@ -75,7 +84,7 @@ function getList() {
 function init() {
   getList();
   addItemsListener();
-  deleteItems();
+  popUp();
 }
 
 $(document).ready(init);
